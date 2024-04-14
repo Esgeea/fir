@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Galery {% endblock %}
+
+{% block content %} 
+    <div class="container-fluid">
+        <div class="row" style="background-color: cadetblue; padding-bottom: 25px">
+            <div class="row">
+                <div class="col-md-3 gy-5">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="text-center">Filters</h3>
+                        </div>
+                        <form method="get">
+                            <div class="card-body">
+                                {{ filters }}
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-outline-success">Search</button>
+                                <a href="{% url 'galery_page' %}" class="btn btn-outline-danger">Reset</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                <div class="row">
+                    {% if all_products %}
+                        {% for product in all_products %}
+                            <div class="col-md-3 gy-5">
+                                <div class="card" >
+                                    <a href="{{ product.image.url }}"><img src="{{ product.image.url }}" class="card-img-top" alt="galery image" height="250"></a>
+                                  <div class="card-body">
+                                    <h5 class="card-title">{{ product }}</h5>
+                                      <div style="overflow-y: auto; height: 100px">
+                                        <p class="card-text">
+                                            Name: {{ product.name }} <br>                                            
+                                            Category: {{ product.category }} <br>
+                                            Code: {{ product.code }} <br>
+                                            Description: {{ product.description }} <br>
+                                        </p>
+                                      </div>
+                                  </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="text-center">
+                            No data available
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            </div> 
+        </div>
+    </div>
+{% endblock %}
