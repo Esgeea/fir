@@ -19,7 +19,7 @@ class ContactTemplateView(TemplateView):
 
 
 class ProductListView(ListView):
-    template_name = 'galery/galery.html'
+    template_name = 'gallery/gallery.html'
     model = Product
     context_object_name = 'all_products'
 

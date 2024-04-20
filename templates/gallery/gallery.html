@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %} Galery {% endblock %}
+{% block title %} Gallery {% endblock %}
 
 {% block content %} 
     <div class="container-fluid">
@@ -17,7 +17,7 @@
                             </div>
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-outline-success">Search</button>
-                                <a href="{% url 'galery_page' %}" class="btn btn-outline-danger">Reset</a>
+                                <a href="{% url 'gallery_page' %}" class="btn btn-outline-danger">Reset</a>
                             </div>
                         </form>
                     </div>
@@ -28,7 +28,7 @@
                         {% for product in all_products %}
                             <div class="col-md-3 gy-5">
                                 <div class="card" >
-                                    <a href="{{ product.image.url }}"><img src="{{ product.image.url }}" class="card-img-top" alt="galery image" height="250"></a>
+                                    <a href="{{ product.image.url }}"><img src="{{ product.image.url }}" class="card-img-top" alt="gallery image" height="250"></a>
                                   <div class="card-body">
                                     <h5 class="card-title">{{ product }}</h5>
                                       <div style="overflow-y: auto; height: 100px">
