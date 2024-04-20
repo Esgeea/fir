@@ -1,8 +1,10 @@
-from django.shortcuts import render
-from django.views.generic import TemplateView, ListView
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
+from django.views.generic import TemplateView, ListView, CreateView
 
 from products.filters import ProductFilter
-from products.models import Product
+from products.forms import ContactForm
+from products.models import Product, Contact
 
 
 class HomeTemplateView(TemplateView):
@@ -11,11 +13,6 @@ class HomeTemplateView(TemplateView):
 
 class AboutTemplateView(TemplateView):
     template_name = 'about/about.html'
-
-
-
-class ContactTemplateView(TemplateView):
-    template_name = 'contact/contact.html'
 
 
 class ProductListView(ListView):
@@ -36,3 +33,13 @@ class ProductListView(ListView):
 
         return data
 
+
+class ContactCreateView(CreateView):
+    template_name = 'contact/contact.html'
+    model = Contact
+    form_class = ContactForm
+    success_url = reverse_lazy('contact-form-sent')
+
+
+class SentTemplateView(TemplateView):
+    template_name = 'contact/sent.html'
