@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Subscribe {% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row" style="background-color: cadetblue; padding-bottom: 50px">
+            <div style="padding: 20px" class="col-md-6 gy-5">
+                <div class="card">
+                    <img src="{% static 'images/Fir_products_on_grass.png' %}" alt="Fir Image" height="500">
+                </div>
+            </div>
+            <div class="col-md-6" style="margin-top: 50px; padding: 20px">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Subscribe or Unsubscribe</h3>
+                        <br>
+                        <p>Thank you for choosing Fir.</p>
+                        <p>Enter your email address bellow if you wish to subscribe to newsletters.</p>
+                        <p>If the email address already exists, you will be unsubscribed</p>
+                    </div>
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="card-body">
+                            {% csrf_token %}
+                            {{ form }}                        
+                        </div>                    
+                        <div class="card-footer text-center">
+                            <button type="submit" class="btn btn-outline-success">Save</button>
+                        </div>  
+                    </form>    
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

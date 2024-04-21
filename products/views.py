@@ -5,8 +5,8 @@ from django.views.generic import TemplateView, ListView, CreateView
 
 from fir.settings import EMAIL_HOST_USER
 from products.filters import ProductFilter
-from products.forms import ContactForm
-from products.models import Product, Contact
+from products.forms import ContactForm, SubscribeForm
+from products.models import Product, Contact, NewsletterSubscriber
 
 
 class HomeTemplateView(TemplateView):
@@ -43,25 +43,57 @@ class ContactCreateView(CreateView):
     success_url = reverse_lazy('contact-form-sent')
 
     def form_valid(self, form):
-        new_form = form.save(commit=False)
-        subject = 'Fir Contact Message - ' + new_form.subject
-        message = 'Subject: ' + new_form.subject + '\n'+ 'Message: ' + new_form.message + '\n' + 'Email:' + new_form.email + '\n' + 'Phone:' + new_form.phone_number
+        if form.is_valid():
+            new_form = form.save(commit=False)
+            subject = 'Fir Contact Message - ' + new_form.subject
+            message = 'Subject: ' + new_form.subject + '\n'+ 'Message: ' + new_form.message + '\n' + 'Email:' + new_form.email + '\n' + 'Phone:' + new_form.phone_number
 
-        mail = EmailMessage(
-            subject,
-            message,
-            EMAIL_HOST_USER,
-            ['esgeea@gmail.com']
-        )
+            mail = EmailMessage(
+                subject,
+                message,
+                EMAIL_HOST_USER,
+                ['esgeea@gmail.com']
+            )
 
-        mail.send()
+            mail.send()
+            new_form.save()
 
-        new_form.save()
-
-        return redirect('contact-form-sent')
-
+            return redirect('contact-form-sent')
+        return super().form_valid(form)
+        
 
 class SentTemplateView(TemplateView):
     template_name = 'contact/sent.html'
 
 
+class SubscribeCreateView(CreateView):
+    template_name = 'newsletter/subscribe.html'
+    model = NewsletterSubscriber
+    form_class = SubscribeForm
+    success_url = reverse_lazy('subscribe_successful')
+
+    def form_valid(self, form):
+        if form.is_valid():
+            email = form.cleaned_data['email']
+            existing_subscriber = NewsletterSubscriber.objects.filter(email=email).first()
+            if existing_subscriber:
+                existing_subscriber.delete()
+                message = "Hello,\n\nThank you for choosing Fir. Your action has been successfully made. You have been unsubscribed."
+            else:
+                new_form = form.save()
+                message = "Hello,\n\nThank you for choosing Fir. Your action has been successfully made. You have been subscribed."
+
+            mail = EmailMessage(
+                "Fir Subscription",
+                message,
+                EMAIL_HOST_USER,
+                [email]
+            )
+
+            mail.send()
+
+            return redirect('subscribe_successful')
+        return super().form_valid(form)
+
+class SubscribeTemplateView(TemplateView):
+    template_name = 'newsletter/subscribe_succsessful.html'
