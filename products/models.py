@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils import timezone
 
 
 class Category(models.Model):
@@ -36,3 +37,12 @@ class Contact(models.Model):
     def __str__(self):
         return self.subject
 
+
+class NewsletterSubscriber(models.Model):
+    email = models.EmailField()
+
+
+class Newsletter(models.Model):
+    subject = models.CharField(max_length=255)
+    body = models.TextField()
+    send_datetime = models.DateTimeField(default=timezone.now)
