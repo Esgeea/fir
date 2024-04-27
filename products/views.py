@@ -52,7 +52,7 @@ class ContactCreateView(CreateView):
                 subject,
                 message,
                 EMAIL_HOST_USER,
-                ['esgeea@gmail.com']
+                ['contact@firbylaura.eu']
             )
 
             mail.send()
