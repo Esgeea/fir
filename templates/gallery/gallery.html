@@ -28,7 +28,7 @@
                         {% for product in all_products %}
                             <div class="col-md-3 gy-5">
                                 <div class="card" >
-                                    <a href="{{ product.image.url }}"><img src="{{ product.image.url }}" class="card-img-top" alt="gallery image" height="250"></a>
+                                    <a href="{{ product.image.url }}"><img src="{{ product.image.url }}" class="card-img-top" alt="gallery image" style="object-fit: cover" height="250"></a>
                                   <div class="card-body">
                                     <h5 class="card-title">{{ product }}</h5>
                                       <div style="overflow-y: auto; height: 100px">
