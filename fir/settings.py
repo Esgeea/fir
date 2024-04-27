@@ -125,8 +125,9 @@ AUTH_USER_MODEL = 'products.SiteUser'
 
 
 
-# testing with SDA credentials
+# testing emails
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 # EMAIL_HOST = 'mail.aplicatiedjango.ro'
 # EMAIL_HOST_USER = 'ro56@aplicatiedjango.ro'
 # EMAIL_HOST_PASSWORD = 'Django1234!'
