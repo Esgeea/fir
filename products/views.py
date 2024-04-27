@@ -78,10 +78,10 @@ class SubscribeCreateView(CreateView):
             existing_subscriber = NewsletterSubscriber.objects.filter(email=email).first()
             if existing_subscriber:
                 existing_subscriber.delete()
-                message = "Hello,\n\nThank you for choosing Fir. Your action has been successfully made. You have been unsubscribed."
+                message = "Hello,\n\nThank you for choosing Fir!\n\nYour action has been successfully made.\nYou have been unsubscribed.\n\n\nHave a great day!"
             else:
                 new_form = form.save()
-                message = "Hello,\n\nThank you for choosing Fir. Your action has been successfully made. You have been subscribed."
+                message = "Hello,\n\nThank you for choosing Fir!\n\nYour action has been successfully made.\nYou have been subscribed.\n\n\nHave a great day!"
 
             mail = EmailMessage(
                 "Fir Subscription",
