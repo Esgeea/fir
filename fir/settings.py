@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 import os
 from pathlib import Path
 
+import secret
 from secret import EMAIL_USE_SSL, EMAIL_HOST, EMAIL_PORT, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, DEFAULT_FROM_EMAIL
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -84,10 +85,10 @@ DATABASE_DEV = {
 DATABASE_DEPLOY = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'r120589firb_fir',
-        'USER': 'r120589firb_fir',
-        'PASSWORD': '&KtyfZy*b&eP',
-        'HOST': '89.42.218.42',
+        'NAME': secret.MARIADB_DB_NAME,
+        'USER': secret.MARIADB_USER,
+        'PASSWORD': secret.MARIADB_PASSWORD,
+        'HOST': secret.MARIADB_HOST,
         'PORT': '3306',
         'OPTIONS': {
             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
