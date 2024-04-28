@@ -74,12 +74,27 @@ WSGI_APPLICATION = 'fir.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
+DATABASE_DEV = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+DATABASE_DEPLOY = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'r120589firb_fir',
+        'USER': 'r120589firb_fir',
+        'PASSWORD': '&KtyfZy*b&eP',
+        'HOST': '89.42.218.42',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
+    }
+}
+DATABASES = DATABASE_DEPLOY
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -116,14 +131,11 @@ USE_TZ = True
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'products.SiteUser'
-
-
 
 # testing emails
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -135,5 +147,3 @@ AUTH_USER_MODEL = 'products.SiteUser'
 # DEFAULT_FROM_EMAIL = 'ro56@aplicatiedjango.ro'
 # see imports -> from secret, for the variables that are used for emails to be sent from gmail
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-
-
