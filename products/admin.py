@@ -7,6 +7,7 @@ admin.site.register(Category)
 admin.site.register(Product)
 admin.site.register(Contact)
 admin.site.register(NewsletterSubscriber)
+admin.site.register(Newsletter)
 
 
 

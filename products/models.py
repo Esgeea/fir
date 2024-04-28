@@ -41,8 +41,14 @@ class Contact(models.Model):
 class NewsletterSubscriber(models.Model):
     email = models.EmailField()
 
+    def __str__(self):
+        return self.email
+
 
 class Newsletter(models.Model):
     subject = models.CharField(max_length=255)
     body = models.TextField()
     send_datetime = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.subject
